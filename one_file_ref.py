@@ -20,6 +20,7 @@ class ModelArgs:
     sliding_window: int
     norm_eps: float
     vocab_size: int
+    rope_theta: float
 
     max_batch_size: int = 0
 
@@ -200,7 +201,7 @@ class TransformerBlock(nn.Module):
         return out
 
 
-def precompute_freqs_cis(dim: int, end: int, theta: float = 10000.0) -> torch.Tensor:
+def precompute_freqs_cis(dim: int, end: int, theta: float) -> torch.Tensor:
     freqs = 1.0 / (theta ** (torch.arange(0, dim, 2)[: (dim // 2)].float() / dim))
     t = torch.arange(end, device=freqs.device)  # type: ignore
     freqs = torch.outer(t, freqs).float()  # type: ignore
@@ -225,7 +226,7 @@ class Transformer(nn.Module):
 
         self.output = nn.Linear(args.dim, args.vocab_size, bias=False)
 
-        self.freqs_cis = precompute_freqs_cis(self.args.head_dim, 128_000).to("cuda")
+        self.freqs_cis = precompute_freqs_cis(self.args.head_dim, 128_000, theta=args.rope_theta).to("cuda")
 
     def forward(
         self,

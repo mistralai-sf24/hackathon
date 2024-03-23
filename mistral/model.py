@@ -29,6 +29,7 @@ class ModelArgs(Serializable):
     sliding_window: int
     norm_eps: float
     vocab_size: int
+    rope_theta: float
 
     max_batch_size: int = 0
 
@@ -189,7 +190,7 @@ class Transformer(nn.Module):
         self.norm = RMSNorm(args.dim, eps=args.norm_eps)
 
         self.output = nn.Linear(args.dim, args.vocab_size, bias=False)
-        self.freqs_cis = precompute_freqs_cis(self.args.head_dim, 128_000)
+        self.freqs_cis = precompute_freqs_cis(self.args.head_dim, 128_000, theta=args.rope_theta)
 
     @property
     def dtype(self) -> torch.dtype:
