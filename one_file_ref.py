@@ -20,7 +20,7 @@ class ModelArgs:
     sliding_window: int
     norm_eps: float
     vocab_size: int
-    rope_theta: float
+    rope_theta: float = 10000.0
 
     max_batch_size: int = 0
 
