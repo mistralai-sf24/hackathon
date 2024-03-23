@@ -1,0 +1,9 @@
+fire
+sentencepiece
+simple-parsing
+bitsandbytes
+scipy
+datasets
+wandb
+tensorboard
+triton==2.2.0  # also works without but throws warning and is slower

@@ -1,0 +1,27 @@
+checkpoint: true
+data:
+  instruct_data: "" # change me
+  instruct:
+    add_flag: true
+initial_model_path: "mistral-7B-v0.1" # change me
+log_freq: 1
+max_norm: 1
+max_steps: 10
+n_replica: 1
+no_ckpt: false
+num_microbatches: 2 # change me (total_batch_size = num_microbatches x GPUs available)
+optim:
+  lr: 1.0e-4
+  weight_decay: 0.1
+  pct_start: 0.05
+lora:
+  enable: true
+  rank: 64
+  quantized: false
+  dropout: 0.0
+  scaling: 2.0
+run_dir: "" # change me
+seed: 0
+seq_len: 16384
+wandb_offline: false
+wandb_project: hackathon_cw # change me

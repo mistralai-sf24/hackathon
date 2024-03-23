@@ -1,0 +1,5 @@
+fire
+sentencepiece
+simple-parsing
+bitsandbytes
+scipy
