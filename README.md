@@ -104,7 +104,7 @@ To benefit from a memory-efficient and performant finetuning, we recommend to us
 
 With proper tuning (carefully calibrated learning rate, rank, LoRA dropout, learning the LoRA weights as well as the normalization layers), LoRA finetuning effectively recovers the performance of full finetuning. We support DDP on top of that, meaning that training speed can be increased on multiple GPUs.
 
-After the training, we merge the LoRA weights: hence, the saved checkpoint is exacly in the same format as one would get with full finetuning. To run a LoRA finetuning on a single GPU, use:
+After the training, we merge the LoRA weights: hence, the saved checkpoint is exactly in the same format as one would get with full finetuning. To run a LoRA finetuning on a single GPU, use:
 
 ```bash
 torchrun --nproc-per-node 1 --master_port $RANDOM -m train reference/7B_lora.yaml
